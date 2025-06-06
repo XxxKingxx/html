@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Registro de Obras</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>Registro Montana</h1>
+
+    <!-- Abas -->
+    <div class="tabs">
+      <button class="tab-btn active" onclick="trocarAba('cadastro')">Cadastro</button>
+      <button class="tab-btn" onclick="trocarAba('historico')">Histórico</button>
+    </div>
+
+    <!-- Conteúdo das Abas -->
+    <div id="aba-cadastro" class="aba ativa">
+      <div class="form">
+        <input type="text" id="obra" placeholder="Digite o nome da obra" />
+        <button onclick="adicionarRegistro()">Adicionar</button>
+        <button onclick="exportarExcel()">Exportar Excel Atual</button>
+        <button onclick="exportarPDF()">Exportar PDF Atual</button>
+      </div>
+
+      <table id="tabela">
+        <thead>
+          <tr>
+            <th>Data</th>
+            <th>Horário</th>
+            <th>Obra</th>
+            <th>Motorista</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <div id="aba-historico" class="aba">
+      <div class="filtros">
+        <input type="text" id="filtroObra" placeholder="Filtrar por obra" oninput="carregarHistorico()" />
+        <input type="date" id="filtroData" oninput="carregarHistorico()" />
+        <button onclick="exportarTodosHistoricos()">Exportar Todos Excel</button>
+        <button onclick="exportarTodosHistoricosPDF()">Exportar Todos PDF</button>
+        <button onclick="apagarTodosHistoricos()">Apagar Todos</button>
+      </div>
+      <div id="historico-container"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
